@@ -18,7 +18,7 @@
             v-card-actions
               v-btn.text-caption(text color="primary" v-text="'Done'" @click="setStatus(task.id, 'done')")
               v-spacer
-              v-btn.text-caption(icon color="grey" @click="deleteTask(task.id)")
+              v-btn.text-caption(icon color="grey" @click="openConfirmDialog(()=>deleteTask(task.id))")
                 v-icon mdi-delete
 
       //- done list
@@ -33,7 +33,7 @@
               v-col(cols='2')
                 v-btn.ma-4.grey--text.lighten-5.text-caption(text v-text="'Todo'" height="20px" @click="setStatus(task.id, 'todo')")
               v-col(cols='1')
-                v-btn.ma-2.text-caption(icon color="grey" @click="deleteTask(task.id)")
+                v-btn.ma-2.text-caption(icon color="grey" @click="openConfirmDialog(deleteTask(task.id))")
                   v-icon mdi-delete
 
     //- create new task dialog
@@ -45,11 +45,14 @@
           v-select(v-model="formInput.status" :items="['todo', 'done']")
           v-btn(@click="addTask" text v-text="'add'" color="primary")
           v-btn(@click="closeDialog" text  v-text="'cancel'" color="red")
+    //- delete confirm
+    ComfirmDialog(v-model="confirmDialog.isOpened" @ok="confirmDialog.onOk" @cancel="confirmDialog.onCancel")
 
 </template>
 
 <script lang='ts'>
 import { defineComponent, ref, reactive, useFetch } from '@nuxtjs/composition-api'
+import { use as useComfirm} from '../util/confirmDialog'
 import axios from 'axios'
 
 declare type Status = 'todo' | 'done'
@@ -72,6 +75,7 @@ export default defineComponent({
     const closeDialog = () => {
       isOpend.value = false
     }
+    const { confirmDialog, openConfirmDialog, closeConfirmDialog } = useComfirm()
 
     /** Input from users */
     const formInput = reactive({
@@ -164,6 +168,7 @@ export default defineComponent({
       }).then(() => {
         const index = tasks.value.indexOf(task)
         tasks.value.splice(index, 1)
+        closeConfirmDialog()
       })
     }
 
@@ -180,6 +185,9 @@ export default defineComponent({
       isOpend,
       openDialog,
       closeDialog,
+      confirmDialog,
+      openConfirmDialog,
+      closeConfirmDialog,
       formInput,
       addTask,
       deleteTask,
