@@ -5,8 +5,8 @@ class Task(models.Model):
     DONE = 'done'
     
     STATUS_CHOICES = {
-        (TODO, 'todo'),
-        (DONE, 'done'),
+        (TODO, 'Todo'),
+        (DONE, 'Done'),
     }
     
     description = models.CharField(max_length=255)

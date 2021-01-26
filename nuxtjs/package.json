@@ -1,0 +1,29 @@
+{
+  "name": "nuxtengo",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt-ts",
+    "build": "nuxt-ts build",
+    "start": "nuxt-ts start",
+    "generate": "nuxt-ts generate"
+  },
+  "dependencies": {
+    "@nuxt/typescript-runtime": "^2.0.1",
+    "@nuxtjs/axios": "^5.12.5",
+    "@nuxtjs/composition-api": "^0.18.1",
+    "@types/axios": "^0.14.0",
+    "core-js": "^3.8.2",
+    "nuxt": "^2.14.12",
+    "pug": "^3.0.0",
+    "pug-plain-loader": "^1.1.0"
+  },
+  "devDependencies": {
+    "@nuxt/types": "^2.14.12",
+    "@nuxt/typescript-build": "^2.0.4",
+    "@nuxtjs/vuetify": "^1.11.3",
+    "eslint-config-prettier": "^7.1.0",
+    "eslint-plugin-prettier": "^3.3.1",
+    "prettier": "^2.2.1"
+  }
+}
