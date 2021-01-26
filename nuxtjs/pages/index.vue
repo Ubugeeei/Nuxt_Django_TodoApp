@@ -46,7 +46,6 @@
           v-btn(@click="addTask" text v-text="'add'" color="primary")
           v-btn(@click="closeDialog" text  v-text="'cancel'" color="red")
 
-
 </template>
 
 <script lang='ts'>
@@ -97,7 +96,6 @@ export default defineComponent({
     /** create tasks to django rest api */
     const addTask = () => {
       if(formInput.description) {
-        console.log('Hi')
         axios({
           method: 'post',
           url: 'http://127.0.0.1:8000/tasks/',
